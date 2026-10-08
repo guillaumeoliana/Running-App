@@ -30,3 +30,9 @@ Deploy over HTTPS, then use the browser's **Add to Home Screen** / **Install app
 The app does not include any personal COROS activities or account data in the repository.
 
 The daily ChatGPT automation reads the official COROS MCP and existing strength sessions through the connected Supabase management tool, updates the server snapshot, and redeploys the current main commit. It is scheduled at 23:59 Europe/Paris. Empty tables do not require an app login and do not produce invented sessions. Strength sessions are merged by ID, preserving local entries. Refreshing the dashboard or returning to it loads the latest published snapshot.
+
+## Dashboard interface
+
+The Analyse screen prioritizes real COROS recovery, weekly training volume, sleep, HRV, resting heart rate and official race estimates. Calendar charts retain missing days as gaps, show sample coverage, and offer pointer, touch and keyboard details. The 7/30-day filter changes the health history; the volume comparison remains the current calendar week. Official COROS training load is displayed when supplied as `trainingLoad` with `date`, `shortTerm`, `longTerm`, and nullable `ratio`. No invented progression scenario is shown as a measured result.
+
+The responsive design provides a bottom navigation on mobile, a consistent dark theme, and reduced-motion support. Reusable typed chart and analysis modules live in `src/ui/`.
