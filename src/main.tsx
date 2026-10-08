@@ -2,7 +2,6 @@ import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./styles.css";
 import "./domain/sport-core";
-import "./data/snapshot";
 
 const root = document.getElementById("root");
 if (!root) throw new Error("Stride root element was not found.");

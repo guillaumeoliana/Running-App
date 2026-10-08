@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-The app keeps its training log in browser storage. Supabase login and cross-device storage use the public project URL and publishable key in `public/config.json`.
+The app keeps its training log in browser storage. COROS readings are served by a private Vercel Function from the server-only `COROS_SNAPSHOT_JSON` environment variable. The Vercel project uses SSO protection; the data and any credentials must never be committed to GitHub or placed in a `VITE_` variable.
 
 ## Architecture and checks
 
@@ -19,13 +19,9 @@ The app shell, navigation, overlays, and shared sport calculations use React, Ty
 
 Use the repository root as the project root. Vercel builds with `npm run build` and serves `dist/`. Static PWA files live in `public/` and are copied into the build output.
 
-For Supabase Auth, set the deployed HTTPS URL as the Site URL and add it to the allowed redirect URLs. The `supabase/schema.sql` migration defines the tables and row-level security policies used by the app. Apply it only if those objects are not already present in the connected Supabase project.
-
-`public/config.json` contains only a Supabase publishable key. Never add a `service_role` key or other server secret to this public site or repository.
-
 ## COROS connection boundary
 
-The COROS connector available in ChatGPT is not an API connection for this web app. Running-session reads, daily synchronization, and writing a revised training week to COROS still need to happen through ChatGPT and its COROS connector. The app can display imported or cloud-stored observations and training decisions; it does not independently call the COROS MCP.
+The COROS MCP is available to ChatGPT, not to the website. ChatGPT reads the COROS data and securely updates `COROS_SNAPSHOT_JSON`; the site reads that snapshot through the Vercel Function. No COROS token or Supabase key is sent to the browser. The MCP remains the source of truth for synchronization and workout changes.
 
 ## Progressive web app
 

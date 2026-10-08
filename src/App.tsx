@@ -5,7 +5,7 @@ import { PageHost } from "./components/PageHost";
 import { mountLegacyApp } from "./legacy/runtime";
 
 export default function App() {
-  const [activePage, setActivePage] = useState("overview");
+  const [activePage, setActivePage] = useState("analytics");
 
   useEffect(() => {
     const handlePageChange = (event: Event) => {

@@ -1,10 +1,9 @@
 const navigation = [
-  ["overview", "Course"],
-  ["plan", "Plan"],
   ["analytics", "Analyse"],
-  ["strength", "Muscu"],
-  ["cut", "Sèche"],
-  ["journal", "Journal"],
+  ["plan", "Plan"],
+  ["overview", "Course"],
+  ["strength", "Fitness"],
+  ["cut", "Alimentation"],
 ] as const;
 
 function Icon({ name }: { name: string }) {
@@ -39,7 +38,7 @@ export function AppHeader({ activePage }: { activePage: string }) {
           <button className="header-status" data-action="nav" data-page="connection"><span className="dot" />COROS · synchronisation ChatGPT</button>
           <button className="header-icon" data-action="theme" aria-label="Changer le thème">☾</button>
           <button className="header-icon" data-action="export" aria-label="Exporter ma sauvegarde">↓</button>
-          <button className="header-avatar" data-action="nav" data-page="journal" aria-label="Mon journal">GO</button>
+          <span className="header-avatar" aria-hidden="true">GO</span>
         </div>
       </div>
     </header>
