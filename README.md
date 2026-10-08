@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-The app keeps its training log in browser storage. COROS readings are served by a server-side Vercel Function from the server-only `COROS_SNAPSHOT_JSON` environment variable. The production dashboard is accessible without login at the owner’s request. Its metrics are therefore visible to visitors. Keep account data and credentials out of GitHub and never use a `VITE_` variable for private values.
+The app keeps newly entered training logs in browser storage. COROS readings and any imported strength sessions are served by a server-side Vercel Function from the server-only `COROS_SNAPSHOT_JSON` environment variable. The app has no login UI; Vercel Deployment Protection controls access independently. Disabling that protection would make the published metrics visible to visitors. Keep account data and credentials out of GitHub and never use a `VITE_` variable for private values.
 
 ## Architecture and checks
 
@@ -29,4 +29,4 @@ Deploy over HTTPS, then use the browser's **Add to Home Screen** / **Install app
 
 The app does not include any personal COROS activities or account data in the repository.
 
-The daily ChatGPT automation reads the official COROS MCP, updates the server snapshot, and redeploys the current main commit. It is scheduled at 23:59 Europe/Paris. Refreshing the dashboard or returning to it loads the latest published snapshot.
+The daily ChatGPT automation reads the official COROS MCP and existing strength sessions through the connected Supabase management tool, updates the server snapshot, and redeploys the current main commit. It is scheduled at 23:59 Europe/Paris. Empty tables do not require an app login and do not produce invented sessions. Strength sessions are merged by ID, preserving local entries. Refreshing the dashboard or returning to it loads the latest published snapshot.
