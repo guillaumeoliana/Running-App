@@ -1,0 +1,47 @@
+const navigation = [
+  ["overview", "Course"],
+  ["plan", "Plan"],
+  ["analytics", "Analyse"],
+  ["strength", "Muscu"],
+  ["cut", "Sèche"],
+  ["journal", "Journal"],
+] as const;
+
+function Icon({ name }: { name: string }) {
+  const paths: Record<string, string> = {
+    overview: "M3 16l5-6 4 4 8-10M3 21h18",
+    plan: "M4 5h16v16H4zM8 3v4m8-4v4M4 10h16",
+    analytics: "M4 20V10m8 10V4m8 16v-7",
+    strength: "M3 8v8m3-10v12m12-12v12m3-10v8M6 12h12",
+    cut: "M12 3c4 5 7 8 7 12a7 7 0 01-14 0c0-4 3-7 7-12z",
+    journal: "M20 12c3-6-5-12-8-5-3-7-11-1-8 5l8 8z",
+    connection: "M8 8l-3 3a4 4 0 006 6l3-3M16 16l3-3a4 4 0 00-6-6l-3 3",
+  };
+  return <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={paths[name] ?? paths.overview} /></svg>;
+}
+
+export function AppHeader({ activePage }: { activePage: string }) {
+  return (
+    <header className="app-header">
+      <div className="header-inner">
+        <button className="brand-logo" data-action="nav" data-page="overview" aria-label="Accueil Stride">
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M4 25L16 7h8L12 25H4zm12 0 8-12h5l-8 12h-5z" fill="currentColor" /></svg>
+          stride.
+        </button>
+        <nav className="app-nav" aria-label="Navigation principale">
+          {navigation.map(([id, label]) => (
+            <button key={id} className={activePage === id ? "active" : ""} data-action="nav" data-page={id} aria-current={activePage === id ? "page" : undefined}>
+              <span className="nav-icon"><Icon name={id} /></span><span>{label}</span>
+            </button>
+          ))}
+        </nav>
+        <div className="header-tools">
+          <button className="header-status" data-action="nav" data-page="connection"><span className="dot" />COROS · synchronisation ChatGPT</button>
+          <button className="header-icon" data-action="theme" aria-label="Changer le thème">☾</button>
+          <button className="header-icon" data-action="export" aria-label="Exporter ma sauvegarde">↓</button>
+          <button className="header-avatar" data-action="nav" data-page="journal" aria-label="Mon journal">GO</button>
+        </div>
+      </div>
+    </header>
+  );
+}
